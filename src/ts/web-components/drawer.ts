@@ -24,7 +24,6 @@ class DrawerComponent extends HTMLElement {
 
   toggleDrawer() {
     this.isOpen = !this.isOpen;
-    console.log('toggling');
     this.handleShowDrawer();
   }
 

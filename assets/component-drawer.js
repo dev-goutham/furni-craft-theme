@@ -61,7 +61,6 @@ var DrawerComponent = /*#__PURE__*/function (_HTMLElement) {
     key: "toggleDrawer",
     value: function toggleDrawer() {
       this.isOpen = !this.isOpen;
-      console.log('toggling');
       this.handleShowDrawer();
     }
   }, {
