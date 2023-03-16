@@ -1,0 +1,50 @@
+<footer>
+  <div class="container">
+    <div class="logo">
+      {% if section.settings.footer-logo != nil %}
+      <img src="{{section.settings.footer-logo | img_url: 'medium'}}" alt="{{section.settings.footer-logo.alt}}">
+      {% else %}
+      <img src="{{'logo-white.png' | asset_img_url}}" alt="{{shop.name}}">
+      {% endif %}
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-left">
+        <div class="main-menu">
+          {% for link in linklists.main-menu.links %}
+          <a href="{{link.url}}">
+            {{link.title}}
+          </a>
+          {% endfor %}
+        </div>
+        <div class="footer-menu">
+
+          {% for link in linklists['footer'].links %}
+          <a href="{{link.url}}">
+            {{link.title}}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="footer-nav-right">
+        <div>
+          &#169; {{"now" | date: '%Y' }} {{shop.name}}
+        </div>
+        <div>
+          {% render 'currency-selector' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+"settings": [
+{
+"type": "image_picker",
+"id": "footer-logo",
+"label": "Footer Logo"
+}
+]
+}
+{% endschema %}

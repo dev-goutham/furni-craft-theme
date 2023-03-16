@@ -1,0 +1,60 @@
+@use "media-queries.scss" as *;
+
+footer {
+  background-color: black;
+  color: white;
+  font-size: 0.813rem;
+  height: 100px;
+  width: 100%;
+
+  .logo {
+    margin-right: 38px;
+  }
+  .container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    @include gt-sm {
+      flex-grow: 1;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-direction: row;
+    }
+    .footer-nav-left {
+      display: flex;
+      flex-direction: column;
+      @include gt-sm {
+        flex-direction: row;
+      }
+      a {
+        display: inline-block;
+      }
+      .main-menu {
+        margin-right: 24px;
+        > * + * {
+          margin-left: 24px;
+        }
+      }
+      .footer-menu {
+        color: #9a9a9a;
+        > * + * {
+          margin-left: 24px;
+        }
+      }
+    }
+    .footer-nav-right {
+      color: #9a9a9a;
+      display: flex;
+      gap: 24px;
+      svg {
+        --stroke-color: #9a9a9a;
+      }
+    }
+  }
+}
