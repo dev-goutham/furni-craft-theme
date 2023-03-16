@@ -50,10 +50,20 @@
 
 <script>
   const drawer = document.querySelector('drawer-component')
-  document.querySelector('.menu-toggle.open').addEventListener('click', () => {
+  const openBtn = document.querySelector('.menu-toggle.open')
+  openBtn.addEventListener('click', () => {
     drawer.openDrawer()
   })
   document.querySelector('.menu-toggle.close').addEventListener('click', () => {
     drawer.closeDrawer()
+  })
+  window.addEventListener('keydown', e => {
+    if(e.code === 'Escape') drawer.closeDrawer()
+  })
+  window.addEventListener('click', e => {
+    
+    if(!drawer.contains(e.target) && !openBtn.contains(e.target)){
+      drawer.closeDrawer()
+    }
   })
 </script>

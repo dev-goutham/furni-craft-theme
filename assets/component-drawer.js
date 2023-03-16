@@ -70,15 +70,17 @@ var DrawerComponent = /*#__PURE__*/function (_HTMLElement) {
       var drawer = (_this$shadowRoot2 = this.shadowRoot) === null || _this$shadowRoot2 === void 0 ? void 0 : _this$shadowRoot2.querySelector('.drawer');
       if (this.isOpen) {
         drawer === null || drawer === void 0 ? void 0 : drawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
       } else {
         drawer === null || drawer === void 0 ? void 0 : drawer.classList.add('hidden');
+        document.body.style.overflow = 'auto';
       }
     }
   }]);
   return DrawerComponent;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 var template = document.createElement('template');
-template.innerHTML = /* html */"\n  <style>\n    .hidden {\n      display: none;\n    }\n    .drawer {\n      width: 400px;\n      max-width: 80%;\n      background: black;\n      height: 100vh;\n      position: absolute;\n      right: 0;\n      top: 0;\n      bottom: 0;\n      transition: all;\n      padding: 40px;\n    }\n\n    .close {\n      display: flex;\n      justify-content: end;\n    }\n\n  </style>\n\n  <div class=\"drawer hidden\">\n    <div class=\"close\">\n      <slot class=\"toggle\" name=\"close-menu\" />\n    </div>\n    <slot class=\"body\" name=\"body\" />\n  </div>\n";
+template.innerHTML = /* html */"\n  <style>\n    .hidden {\n      display: none;\n    }\n    .drawer {\n      width: 200px;\n      max-width: 80%;\n      background: black;\n      height: 100vh;\n      position: absolute;\n      right: 0;\n      top: 0;\n      bottom: 0;\n      transition: all;\n      padding: 40px;\n    }\n\n    .close {\n      display: flex;\n      justify-content: end;\n    }\n\n  </style>\n\n  <div class=\"drawer hidden\">\n    <div class=\"close\">\n      <slot class=\"toggle\" name=\"close-menu\" />\n    </div>\n    <slot class=\"body\" name=\"body\" />\n  </div>\n";
 customElements.define('drawer-component', DrawerComponent);
 /******/ })()
 ;

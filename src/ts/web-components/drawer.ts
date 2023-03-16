@@ -32,8 +32,10 @@ class DrawerComponent extends HTMLElement {
 
     if (this.isOpen) {
       drawer?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     } else {
       drawer?.classList.add('hidden');
+      document.body.style.overflow = 'auto';
     }
   }
 }
@@ -46,7 +48,7 @@ template.innerHTML = /* html */ `
       display: none;
     }
     .drawer {
-      width: 400px;
+      width: 200px;
       max-width: 80%;
       background: black;
       height: 100vh;
