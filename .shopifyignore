@@ -19,3 +19,4 @@ e2e/
 tsconfig.json
 package.json
 yarn.lock
+mix-manifest.json

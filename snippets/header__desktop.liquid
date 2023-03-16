@@ -1,0 +1,40 @@
+<div class="desktop">
+
+  <nav>
+    {% for link in linklists.main-menu.links %}
+      <a href="{{link.url}}">
+        {{ link.title }}
+      </a>
+    {% endfor %}
+  </nav>
+  <div class="right">
+    <div class="search">
+      <span>
+        search
+      </span>
+      <span>
+        {% render 'icon-search' %}
+      </span>
+    </div>
+    <div class="currency">
+      <!-- todo: Create a html select for this part -->
+      <span>
+        {{ shop.currency }}
+      </span>
+      <span>
+        {% render 'icon-arrow-down' %}
+      </span>
+    </div>
+    <a href="{{routes.cart_url}}" class="cart">
+      <span>Cart</span>
+      {% capture count_class %}
+        {% if cart.item_count == 0 %}
+          empty
+        {% endif %}
+      {% endcapture %}
+      <span class="count {{count_class}}">
+        {{ cart.item_count }}
+      </span>
+    </a>
+  </div>
+</div>

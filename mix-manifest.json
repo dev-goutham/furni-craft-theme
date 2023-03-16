@@ -1,5 +1,6 @@
 {
     "/assets/main.js": "/assets/main.js",
-    "/assets/index.js": "/assets/index.js",
+    "/assets/component-drawer.js": "/assets/component-drawer.js",
+    "/assets/component-icon-button.js": "/assets/component-icon-button.js",
     "/assets/styles.css": "/assets/styles.css"
 }

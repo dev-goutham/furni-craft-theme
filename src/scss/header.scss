@@ -1,0 +1,134 @@
+@use "_media-queries.scss" as *;
+
+header {
+  height: 100px;
+  display: flex;
+  align-items: baseline;
+  font-weight: 500;
+  font-size: 0.813rem;
+  justify-content: space-between;
+  .logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 40px;
+    img {
+      height: 24px;
+      transform: translateY(3.5px);
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .right {
+    margin-left: auto;
+    color: #707070;
+    --stroke-color: #707070;
+    display: flex;
+    line-height: 20px;
+    & > * {
+      display: flex;
+    }
+    span {
+      display: inline-block;
+    }
+    .search {
+      margin-right: 21px;
+      svg {
+        margin-left: 10px;
+        transform: translateY(4px);
+      }
+    }
+
+    .currency {
+      margin-right: 14px;
+      svg {
+        margin-left: 5px;
+        transform: translateY(9px);
+      }
+    }
+
+    .cart {
+      .count {
+        margin-left: 9px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        color: white;
+        background-color: black;
+        border-radius: 50%;
+      }
+
+      .count.empty {
+        background-color: #808080;
+      }
+    }
+  }
+
+  .desktop {
+    display: none;
+
+    @include gt-sm {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  .mobile {
+    display: block;
+    @include gt-sm {
+      display: none;
+    }
+  }
+
+  .menu-toggle {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    svg {
+      height: 24px;
+      color: #808080;
+    }
+  }
+
+  .drawer-body {
+    color: white;
+    --stroke-color: white;
+    svg {
+      color: white;
+    }
+    .close {
+      color: white;
+      margin-left: auto;
+      display: block;
+    }
+
+    nav {
+      flex-direction: column;
+      margin: 40px 0;
+      a {
+        display: block;
+      }
+    }
+
+    hr {
+      border-color: #707070;
+    }
+
+    .bottom {
+      margin-top: 40px;
+    }
+
+    .bottom > * {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 5px;
+    }
+  }
+}

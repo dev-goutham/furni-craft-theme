@@ -1,0 +1,66 @@
+{{ 'component-drawer.js' | asset_url | script_tag }}
+{{ 'component-icon-button.js' | asset_url | script_tag }}
+
+<div class="mobile">
+
+  <button slot="open-menu" class="menu-toggle open">
+    {% render 'icon-menu' %}
+  </button>
+  <drawer-component>
+    <div class="drawer-body" slot="body">
+      <button class="menu-toggle close">
+        {% render 'icon-close' %}
+      </button>
+      <div>
+        <nav>
+          {% for link in linklists.main-menu.links %}
+          <a href="{{link.url}}">
+            {{link.title}}
+          </a>
+          {% endfor %}
+        </nav>
+        <hr />
+        <div class="bottom">
+          <div class="search">
+            <span>
+              search
+            </span>
+            <span>
+              {% render 'icon-search' %}
+            </span>
+          </div>
+          <div class="currency">
+            <!-- todo: Create a html select for this part -->
+            <span>
+              {{ shop.currency }}
+            </span>
+            <span>
+              {% render 'icon-arrow-down' %}
+            </span>
+          </div>
+          <a href="{{routes.cart_url}}" class="cart">
+            <span>Cart</span>
+            {% capture count_class %}
+            {% if cart.item_count == 0 %}
+            empty
+            {% endif %}
+            {% endcapture %}
+            <span class="count {{count_class}}">
+              {{ cart.item_count }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </drawer-component>
+</div>
+
+<script>
+  const drawer = document.querySelector('drawer-component')
+  document.querySelector('.menu-toggle.open').addEventListener('click', () => {
+    drawer.openDrawer()
+  })
+  document.querySelector('.menu-toggle.close').addEventListener('click', () => {
+    drawer.closeDrawer()
+  })
+</script>
