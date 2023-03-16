@@ -16,15 +16,7 @@
         {% render 'icon-search' %}
       </span>
     </div>
-    <div class="currency">
-      <!-- todo: Create a html select for this part -->
-      <span>
-        {{ shop.currency }}
-      </span>
-      <span>
-        {% render 'icon-arrow-down' %}
-      </span>
-    </div>
+    {% render 'currency-selector' %}
     <a href="{{routes.cart_url}}" class="cart">
       <span>Cart</span>
       {% capture count_class %}

@@ -29,14 +29,7 @@
               {% render 'icon-search' %}
             </span>
           </div>
-          <div class="currency">
-            <!-- todo: Create a html select for this part -->
-            <span>
-              {{ shop.currency }}
-            </span>
-            <span>
-              {% render 'icon-arrow-down' %}
-            </span>
+          {% render 'currency-selector' %}
           </div>
           <a href="{{routes.cart_url}}" class="cart">
             <span>Cart</span>
