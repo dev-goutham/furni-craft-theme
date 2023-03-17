@@ -1,36 +1,57 @@
 <footer>
-  <div class="container">
-    <div class="logo">
-      {% if section.settings.footer-logo != nil %}
-      <img src="{{section.settings.footer-logo | img_url: 'medium'}}" alt="{{section.settings.footer-logo.alt}}">
-      {% else %}
-      <img src="{{'logo-white.png' | asset_img_url}}" alt="{{shop.name}}">
-      {% endif %}
-    </div>
-    <div class="footer-nav">
-      <div class="footer-nav-left">
-        <div class="main-menu">
-          {% for link in linklists.main-menu.links %}
-          <a href="{{link.url}}">
-            {{link.title}}
-          </a>
-          {% endfor %}
-        </div>
-        <div class="footer-menu">
+  <div class='footer-banner'>
+    {% if section.settings['footer-image'] %}
+      {{
+        section.settings['footer-image']
+        | img_tag: loading: 'lazy'
+      }}
+    {% else %}
+      {{
+        'footer-image.png'
+        | asset_url
+        | img_tag: loading: 'lazy'
+      }}
+    {% endif %}
+  </div>
 
-          {% for link in linklists['footer'].links %}
-          <a href="{{link.url}}">
-            {{link.title}}
-          </a>
-          {% endfor %}
-        </div>
+  <div class='footer-end'>
+    <div class='container'>
+      <div class='logo'>
+        {% if section.settings['footer-logo'] != null %}
+          <img
+            src='{{section.settings.footer-logo | img_url: 'medium'}}'
+            alt='{{section.settings.footer-logo.alt}}'
+          >
+        {% else %}
+          <img
+            src='{{'logo-white.png' | asset_img_url}}'
+            alt='{{shop.name}}'
+          >
+        {% endif %}
       </div>
-      <div class="footer-nav-right">
-        <div>
-          &#169; {{"now" | date: '%Y' }} {{shop.name}}
+      <div class='footer-nav'>
+        <div class='footer-nav-left'>
+          <div class='main-menu'>
+            {% for link in linklists['main-menu'].links %}
+              <a href='{{link.url}}'>
+                {{ link.title }}
+              </a>
+            {% endfor %}
+          </div>
+          <div class='footer-menu'>
+            {% for link in linklists.footer.links %}
+              <a href='{{link.url}}'>
+                {{ link.title }}
+              </a>
+            {% endfor %}
+          </div>
         </div>
-        <div>
-          {% render 'currency-selector' %}
+        <div class='footer-nav-right'>
+          <div>
+            &#169; {{ 'now' | date: '%Y' }}
+            {{ shop.name }}
+          </div>
+          <div>{% render 'currency-selector' %}</div>
         </div>
       </div>
     </div>
@@ -39,12 +60,18 @@
 
 {% schema %}
 {
-"settings": [
-{
-"type": "image_picker",
-"id": "footer-logo",
-"label": "Footer Logo"
-}
-]
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer-logo",
+      "label": "Footer Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer-image",
+      "label": "FooterImage",
+      "info": "Perferrably with an aspect ratio of 6:1"
+    }
+  ]
 }
 {% endschema %}
