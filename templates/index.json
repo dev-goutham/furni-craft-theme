@@ -1,0 +1,9 @@
+{
+  "name": "Index Template",
+  "sections": {
+    "hero-area": {
+      "type": "hero"
+    }
+  },
+  "order": ["hero-area"]
+}

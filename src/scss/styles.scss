@@ -1,6 +1,7 @@
 @forward "_media-queries.scss";
 @use "reset.scss";
 @use "header.scss";
+@use "hero.scss";
 @use "footer.scss";
 
 :root {
@@ -12,6 +13,7 @@
 body {
   font-family: var(--font-mono);
   position: relative;
+  overflow-x: hidden;
 }
 
 main {

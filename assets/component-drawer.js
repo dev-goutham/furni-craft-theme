@@ -84,7 +84,7 @@ var DrawerComponent = /*#__PURE__*/function (_HTMLElement) {
   return DrawerComponent;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 var template = document.createElement('template');
-template.innerHTML = /* html */"\n  <style>\n    .hidden {\n      display: none;\n    }\n    .drawer {\n      width: 200px;\n      max-width: 80%;\n      background: black;\n      height: 100vh;\n      position: absolute;\n      right: 0;\n      top: 0;\n      bottom: 0;\n      transition: all;\n      padding: 40px;\n    }\n\n    .close {\n      display: flex;\n      justify-content: end;\n    }\n\n  </style>\n\n  <div class=\"drawer hidden\">\n    <div class=\"close\">\n      <slot class=\"toggle\" name=\"close-menu\" />\n    </div>\n    <slot class=\"body\" name=\"body\" />\n  </div>\n";
+template.innerHTML = /* html */"\n  <style>\n    .hidden {\n      display: none;\n    }\n    .drawer {\n      width: 200px;\n      max-width: 80%;\n      background: black;\n      height: 100vh;\n      position: absolute;\n      right: 0;\n      top: 0;\n      bottom: 0;\n      transition: all;\n      padding: 40px;\n      z-index: 11;\n    }\n\n    .close {\n      display: flex;\n      justify-content: end;\n    }\n\n  </style>\n\n  <div class=\"drawer hidden\">\n    <div class=\"close\">\n      <slot class=\"toggle\" name=\"close-menu\" />\n    </div>\n    <slot class=\"body\" name=\"body\" />\n  </div>\n";
 customElements.define('drawer-component', DrawerComponent);
 
 /***/ }),

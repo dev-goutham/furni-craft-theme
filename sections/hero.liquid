@@ -1,0 +1,175 @@
+<script
+  src='https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js'
+></script>
+
+<section class='hero-area'>
+  {% if section.blocks.size == 0 %}
+    <!--
+      only has a placeholder-class variable if this section of code runs
+    -->
+    {% assign placeholder-class = 'placeholder-cta' %}
+    <div class='hero-image-container placeholder'>
+      {{ 'lifestyle-2' | placeholder_svg_tag }}
+    </div>
+  {% else %}
+    <swiper-container init='false'>
+      {% for block in section.blocks %}
+        {% if block.type == 'slide' %}
+          <swiper-slide
+            style='background-image: url({{block.settings.image | img_url: 'master'}};'
+            class='hero-image-container'
+          >
+          </swiper-slide>
+        {% endif %}
+      {% endfor %}
+    </swiper-container>
+  {% endif %}
+  {% if section.blocks.size > 1 %}
+    <div class='icons'>
+      <button
+        class='right'
+      >
+        {% render 'icon-right' %}
+      </button>
+      <button class='left'>
+        {% render 'icon-left' %}
+      </button>
+    </div>
+  {% endif %}
+  <div class='cta {{placeholder-class}}'>
+    <h1 style='color: {{section.settings.cta-color | default: 'inherit' }}'>
+      {{ section.settings.title | default: 'Image Banner' }}
+    </h1>
+    <p>
+      {{
+        section.settings.subtitle
+        | default: 'Lorem ipsum dolor.'
+      }}
+    </p>
+    <button>
+      <a href='{{section.settings.button-url | default: '#'}}'>
+        {{
+          section.settings['button-text']
+          | default: 'Shop All'
+        }}
+      </a>
+    </button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Area",
+  "limit": 1,
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Hero area title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Hero area subtitle"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "Hero area call to action button text"
+    },
+    {
+      "type": "url",
+      "id": "button-url",
+      "label": "Hero area call to action url"
+    },
+    {
+      "type": "color",
+      "id": "cta-color",
+      "label": "Text color for the heading and subtitle of hero area"
+    },
+    {
+      "type": "color",
+      "id": "btn-bg-color",
+      "label": "Button Color"
+    },
+    {
+      "type": "color",
+      "id": "btn-text-color",
+      "label": "Button text color"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Area",
+      "blocks": [
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header"]
+  }
+}
+{% endschema %}
+
+<script>
+  const swiperEl = document.querySelector(
+    'swiper-container',
+  );
+
+  // swiper parameters
+  const swiperParams = {
+    on: {
+      init() {
+        const numberOfSlides =
+          swiperEl.swiper.slides.length;
+
+        const rightBtn =
+          document.querySelector('.icons .right');
+        const leftBtn =
+          document.querySelector('.icons .left');
+
+        rightBtn.addEventListener('click', () => {
+          const currentSlide =
+            swiperEl.swiper.activeIndex + 1;
+          if (currentSlide >= numberOfSlides) {
+            swiperEl.swiper.slideTo(0);
+          } else {
+            swiperEl.swiper.slideTo(currentSlide + 1);
+          }
+        });
+
+        leftBtn.addEventListener('click', () => {
+          const currentSlide = swiperEl.swiper.activeIndex;
+          if (currentSlide <= 0) {
+            swiperEl.swiper.slideTo(numberOfSlides - 1);
+          } else {
+            swiperEl.swiper.slideTo(currentSlide - 1);
+          }
+        });
+      },
+    },
+  };
+
+  // now we need to assign all parameters to Swiper element
+  Object.assign(swiperEl, swiperParams);
+
+  // and now initialize it
+  swiperEl.initialize();
+</script>
