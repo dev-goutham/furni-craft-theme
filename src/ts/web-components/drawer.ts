@@ -4,7 +4,9 @@ class DrawerComponent extends HTMLElement {
     super();
     this.isOpen = false;
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+    this.shadowRoot?.appendChild(
+      template.content.cloneNode(true),
+    );
     this.handleShowDrawer();
   }
 
@@ -28,7 +30,8 @@ class DrawerComponent extends HTMLElement {
   }
 
   handleShowDrawer() {
-    const drawer = this.shadowRoot?.querySelector('.drawer');
+    const drawer =
+      this.shadowRoot?.querySelector('.drawer');
 
     if (this.isOpen) {
       drawer?.classList.remove('hidden');
@@ -58,6 +61,7 @@ template.innerHTML = /* html */ `
       bottom: 0;
       transition: all;
       padding: 40px;
+      z-index: 11;
     }
 
     .close {
