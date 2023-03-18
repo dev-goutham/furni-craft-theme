@@ -1,0 +1,22 @@
+<a href='{{product.url}}' class='product-card'>
+  {{
+    product.featured_image
+    | img_url: 'master'
+    | img_tag: loading: 'lazy'
+  }}
+  <div class='product-details'>
+    <div>
+      <h3>
+        {{ product.title }}
+      </h3>
+      <p>
+        {% comment %} TODO: Get actual variants here {% endcomment %}
+        {{ product.options | size }} options /
+        {{ product.variants | size }} variants
+      </p>
+    </div>
+    <div>
+      {{ product.price | money_without_trailing_zeros }}
+    </div>
+  </div>
+</a>

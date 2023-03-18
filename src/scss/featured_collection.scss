@@ -1,0 +1,36 @@
+@use "media-queries.scss" as *;
+
+.featured_collection {
+  display: flex;
+  padding: 93px 0;
+  align-items: center;
+  .details {
+    width: 208px;
+    margin-right: 26px;
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      font-size: 0.813rem;
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    gap: 38px;
+    margin-right: 79px;
+
+    @include gt-md {
+      grid-template-columns: repeat(3, auto);
+    }
+  }
+
+  button {
+    background-color: black;
+    padding: 10px 19px 10px 21px;
+    font-size: 0.813rem;
+    color: white;
+  }
+}

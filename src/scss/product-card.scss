@@ -1,0 +1,25 @@
+.product-card {
+  display: block;
+  img {
+    height: 570px;
+    object-fit: cover;
+  }
+
+  .product-details {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    font-size: 0.813rem;
+    h3 {
+      font-family: var(--font-serif);
+      font-size: 0.938rem;
+      line-height: 20px;
+    }
+    p {
+      line-height: 20px;
+      font-weight: 400;
+      color: #707070;
+    }
+  }
+}
