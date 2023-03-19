@@ -1,0 +1,56 @@
+<section class='quote_block'>
+  <h4>
+    {{ section.settings.quote }}
+  </h4>
+  <p>
+    {{ section.settings['quote-author'] }}
+  </p>
+  <p>
+    {{ section.settings['quote-author-org'] }}
+  </p>
+  <div class='button-container'>
+    <a href='{{section.settings.button-url}}'>
+      {{ section.settings['button-text'] }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quote Block",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote"
+    },
+    {
+      "type": "text",
+      "id": "quote-author",
+      "label": "Quote Author"
+    },
+    {
+      "type": "text",
+      "id": "quote-author-org",
+      "label": "Quote Author Organization"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "default": "Read More",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button-url",
+      "default": "/",
+      "label": "Button Url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Block"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+.quote_block {
+  margin: 144px auto;
+  max-width: 650px;
+  h4 {
+    font-size: 1.938rem;
+    line-height: 40px;
+    font-weight: 500;
+    margin-bottom: 17px;
+  }
+  p {
+    font-family: var(--font-serif);
+    font-size: 0.938rem;
+  }
+  .button-container {
+    width: 100%;
+    margin-top: 29px;
+    display: flex;
+    justify-content: center;
+    a {
+      display: inline-block;
+      padding: 10px 21px 10px 19px;
+      background-color: black;
+      color: white;
+      font-size: 0.813rem;
+    }
+  }
+}
