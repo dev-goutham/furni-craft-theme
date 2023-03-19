@@ -6,13 +6,13 @@
         "7b03fc69-2650-43bd-828a-d41e04676c83": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/hero-stitch.jpg"
+            "image": "shopify://shop_images/hero-stitch.jpg"
           }
         },
         "df0e4fd7-ed6c-4241-8575-d56c7d4de7eb": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/collection-hero.jpg"
+            "image": "shopify://shop_images/collection-hero.jpg"
           }
         }
       },
@@ -35,10 +35,14 @@
       "settings": {
         "featured_collection": "collection-1"
       }
+    },
+    "featured_products": {
+      "type": "featured_products"
     }
   },
   "order": [
     "hero-area",
-    "featured_collection"
+    "featured_collection",
+    "featured_products"
   ]
 }

@@ -1,0 +1,63 @@
+<section class='featured_products'>
+  {% for block in section.blocks %}
+    {% assign featured_product = block.settings.product %}
+
+    <div class='featured_product'>
+      <img
+        src='{{featured_product.featured_image |img_url: 'master' }}'
+        alt='{{featured_product.featured_image.alt}}'
+        class='{{block.settings.direction}}'
+      >
+      <div class='featured_product-details'>
+        <div>
+          <h3>{{ featured_product.title }}</h3>
+          <p>
+            {{ featured_product.description }}
+          </p>
+          <a href='{{featured_product.url}}'> Shop Now </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "name": "products",
+      "type": "products",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product to be featured"
+        },
+        {
+          "type": "select",
+          "options": [
+            {
+              "value": "rtl",
+              "label": "right-to-left"
+            },
+            {
+              "value": "ltr",
+              "label": "left-to-right"
+            }
+          ],
+          "default": "ltr",
+          "label": "Direction of the product",
+          "id": "direction"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}
