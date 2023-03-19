@@ -1,27 +1,35 @@
+{% if section.settings.featured_collection == null %}
+  {% assign featured_collection = collections.frontpage %}
+{% else %}
+  {% assign featured_collection = section.settings.featured_collection %}
+{% endif %}
+
 <section class='container featured_collection'>
   <div class='details'>
     <h2>
-      {{ section.settings.featured_collection.title }}
+      {{ featured_collection.title }}
     </h2>
     <p>
-      {{ section.settings.featured_collection.description }}
+      {{ featured_collection.description }}
     </p>
   </div>
   <div class='product-grid'>
-    {% for item in section.settings.featured_collection.products
-      limit: 2
-    %}
+    {% for item in featured_collection.products limit: 2 %}
       {% render 'product-card', product: item %}
     {% endfor %}
   </div>
   <div>
     <button>
-      <a href='{{section.settings.featured_collection.url}}'>
-        Shop Now
-      </a>
+      <a href='{{featured_collection.url}}'> Shop Now </a>
     </button>
   </div>
 </section>
+
+<script>
+  console.log('script lodied  ');
+  console.log({{section.settings.featured_collection | json}})
+  console.log({{collections['frontpage'] | json}})
+</script>
 
 {% schema %}
 {
