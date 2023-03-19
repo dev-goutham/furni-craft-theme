@@ -1,7 +1,40 @@
 <section class='featured_products'>
+  {% if section.blocks.size == 0 %}
+    <div class='featured_product'>
+      {{ 'product-1' | placeholder_svg_tag }}
+      <div class='featured_product-details'>
+        <div>
+          <h3>Product-1</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Qui commodi laborum ipsa hic
+            fugit facilis veniam nostrum reiciendis eaque
+            nemo?
+          </p>
+          <a href='#'> Shop Now </a>
+        </div>
+      </div>
+    </div>
+    <div class='featured_product'>
+      {{ 'product-2' | placeholder_svg_tag: 'rtl' }}
+      <div class='featured_product-details'>
+        <div>
+          <h3>Product-2</h3>
+          <p>
+            Aut repellendus delectus quidem quae corrupti,
+            dolorum, doloremque laudantium nisi voluptatem
+            ducimus voluptates dolores? Eaque dignissimos
+            explicabo hic minus itaque culpa, beatae nihil
+            facere quam! Eveniet, veritatis iusto vel
+            perferendis perspiciatis error.
+          </p>
+          <a href='#'> Shop Now </a>
+        </div>
+      </div>
+    </div>
+  {% endif %}
   {% for block in section.blocks %}
     {% assign featured_product = block.settings.product %}
-
     <div class='featured_product'>
       <img
         src='{{featured_product.featured_image |img_url: 'master' }}'

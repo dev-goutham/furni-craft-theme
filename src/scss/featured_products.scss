@@ -1,14 +1,15 @@
 .featured_products {
-  margin-bottom: 20px;
   .featured_product {
     // max-width: 1440px;
     margin: 0 auto;
+    svg,
     img {
       display: block;
       width: 100%;
       max-height: 600px;
       object-fit: cover;
     }
+    svg.rtl,
     img.rtl {
       order: 2;
     }
