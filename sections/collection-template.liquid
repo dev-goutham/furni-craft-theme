@@ -1,0 +1,49 @@
+<section class='collection-template'>
+  <div class='banner'>
+    {% if section.settings.banner != blank %}
+      <img
+        src='{{section.settings.banner | img_url: 'large'}}'
+        alt='{{section.settings.banner.alt}}'
+      >
+    {% else %}
+      {{
+        'lifestyle-2'
+        | placeholder_svg_tag: 'placeholder'
+      }}
+    {% endif %}
+  </div>
+  <div class='collection container'>
+    <div class='details'>
+      <h2>
+        {{ collection.title }}
+      </h2>
+      <p>
+        {{ collection.description }}
+      </p>
+      <hr>
+      <div class='sort'>
+        <h4>Sort</h4>
+        <p>price, $-$$$</p>
+        <p>price, $$$-$</p>
+      </div>
+    </div>
+    <div class='collection-grid'>
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection template",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Banner"
+    }
+  ]
+}
+{% endschema %}

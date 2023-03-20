@@ -1,5 +1,6 @@
 .product-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   img {
     height: 570px;
     object-fit: cover;
