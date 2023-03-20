@@ -1,9 +1,13 @@
 {
-  "name": "Collection Template",
   "sections": {
     "template": {
-      "type": "collection-template"
+      "type": "collection-template",
+      "settings": {
+        "banner": "shopify:\/\/shop_images\/hero-stitch.jpg"
+      }
     }
   },
-  "order": ["template"]
+  "order": [
+    "template"
+  ]
 }
