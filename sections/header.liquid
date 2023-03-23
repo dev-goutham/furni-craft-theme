@@ -1,24 +1,35 @@
-<header class="container">
-  <a class="logo" href="/">
-    {% if section.settings.logo-transparent-background !=
-    nil %}
-    <img
-      src="{{section.settings.logo-transparent-background | img_url: 'medium'}}"
-      alt="{{section.settings.logo-transparent-background.alt}}"
-    />
-    {% elsif shop.brand.logo != nil %}
-    <img
-      src="{{shop.brand.logo | img_url: 'medium' }}"
-      alt="{{shop.name}}"
-    />
+<header class='container'>
+  <a class='logo' href='/'>
+    {% if section.settings['logo-transparent-background']
+        != null
+    %}
+      <img
+        src='{{section.settings.logo-transparent-background | img_url: 'medium'}}'
+        alt='{{section.settings.logo-transparent-background.alt}}'
+      >
+    {% elsif shop.brand.logo != null %}
+      <img
+        src='{{shop.brand.logo | img_url: 'medium' }}'
+        alt='{{shop.name}}'
+      >
     {% else %}
-    <div>{{shop.name}}</div>
+      <div>{{ shop.name }}</div>
     {% endif %}
   </a>
-  {% render 'header__desktop' %} {% render 'header__mobile'
-  %}
+  {% render 'header__desktop' %}
+  {% render 'header__mobile' %}
 </header>
 
-{% schema %} { "settings": [ { "type": "image_picker", "id":
-"logo-transparent-background", "label": "Logo With
-Transparent background" } ] } {% endschema %}
+{{ 'component-cart.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo-transparent-background",
+      "label": "Logo With Transparent background"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+{
+  "name": "Product Template",
+  "sections": {
+    "template": {
+      "type": "product-template"
+    }
+  },
+  "order": ["template"]
+}

@@ -1,5 +1,8 @@
 {
+    "/assets/product.js": "/assets/product.js",
     "/assets/component-drawer.js": "/assets/component-drawer.js",
     "/assets/component-icon-button.js": "/assets/component-icon-button.js",
+    "/assets/component-variant.js": "/assets/component-variant.js",
+    "/assets/component-cart.js": "/assets/component-cart.js",
     "/assets/styles.css": "/assets/styles.css"
 }

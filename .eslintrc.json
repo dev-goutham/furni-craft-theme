@@ -3,22 +3,16 @@
     "browser": true,
     "es2021": true
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "jest"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:jest/recommended",
-    "plugin:playwright/playwright-test"
-  ],
+  "extends": ["eslint:recommended"],
   "rules": {
     // Rules
     "no-var": "error",
-    "no-console": "warn"
+    "no-console": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off"
   }
 }

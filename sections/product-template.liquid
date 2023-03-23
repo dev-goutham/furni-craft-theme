@@ -1,0 +1,135 @@
+{{ 'component-variant.js' | asset_url | script_tag }}
+
+<section class='product-template'>
+  <div class='images'>
+    {% if product.media.size > 1 %}
+      <button class='swipe-left'>
+        {% render 'icon-left' %}
+      </button>
+      <swiper-container init='false'>
+        {% for image in product.media %}
+          <swiper-slide>
+            <img
+              src='{{image.src | img_url: 'master'}}'
+              alt='{{image.alt}}'
+            >
+            <div class='images-count'>
+              {{ forloop.index }} of
+              {{ product.media.size }}
+            </div>
+          </swiper-slide>
+        {% endfor %}
+      </swiper-container>
+      <button class='swipe-right'>
+        {% render 'icon-right' %}
+      </button>
+    {% else %}
+      <img src='{{product.media[0].src | img_url: 'master'}}'>
+    {% endif %}
+  </div>
+  <div class='details'>
+    <div class='collection'>
+      {{ product.collections[0].title }}
+    </div>
+    <h1>
+      {{ product.title }}
+    </h1>
+    {% form 'product',
+      product,
+      id: 'product-form',
+      novalidate: 'novalidate'
+    %}
+      <input
+        type='hidden'
+        id='id'
+        name='id'
+        value='{{product.selected_or_first_available_variant.id}}'
+      >
+      <variant-component
+        data-url='{{product.url}}'
+        data-section='{{section.id}}'
+      >
+        <script type='application/json'>
+          {"variants": {{ product.variants | json }},
+          "currentVariant": {{product.selected_or_first_available_variant | json}}}
+        </script>
+        {% for option in product.options_with_values %}
+          {% assign loopIndex = forloop.index0 %}
+          {% if option.name == 'Color' %}
+            <fieldset
+              class='variant-selector color'
+              slot='variant'
+            >
+              <div class='label'>
+                {{ option.name }}
+              </div>
+              <div class='options'>
+                {%- assign selected = product.selected_or_first_available_variant.options[forloop.index0] -%}
+                {% for value in option.values %}
+                  <div class='variant-option'>
+                    <input
+                      type='radio'
+                      name='{{loopIndex}}'
+                      id='{{value}}'
+                      value='{{value}}'
+                      {% if selected == value %}
+                        checked='checked'
+                      {% endif %}
+                    >
+                    <label
+                      title='{{value}}'
+                      class='{{value}}'
+                      for='{{value}}'
+                    >
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </fieldset>
+          {% else %}
+            <fieldset
+              class='variant-selector'
+              slot='variant'
+            >
+              <label for='{{option.name}}'>
+                {{- option.name -}}
+              </label>
+              {% assign selected = product.selected_or_first_available_variant.options[forloop.index0] %}
+              <select
+                value='Matte'
+                name='{{loopIndex}}'
+                id='{{option.name}}'
+              >
+                {% for value in option.values %}
+                  <option
+                    class='variant-option'
+                    value='{{value}}'
+                    {% if selected == value %}
+                      selected='selected'
+                    {% endif %}
+                  >
+                    {{ value }}
+                  </option>
+                {% endfor %}
+              </select>
+            </fieldset>
+          {% endif %}
+        {% endfor %}
+      </variant-component>
+      <input
+        type='submit'
+        {% if product.selected_or_first_available_variant.available %}
+          value='Add to Cart {{product.selected_or_first_available_variant.price | money_without_trailing_zeros}}'
+        {% else %}
+          value='Out of Stock'
+          disabled
+          class='disabled'
+        {% endif %}
+        slot='submit'
+        id='price'
+      >
+    {% endform %}
+  </div>
+</section>
+
+{{ 'product.js' | asset_url | script_tag }}

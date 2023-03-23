@@ -1,9 +1,9 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 var __webpack_exports__ = {};
-/*!*****************************************!*\
-  !*** ./src/ts/web-components/drawer.ts ***!
-  \*****************************************/
+/*!******************************************!*\
+  !*** ./src/ts/web-components/variant.ts ***!
+  \******************************************/
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -23,64 +23,126 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var DrawerComponent = /*#__PURE__*/function (_HTMLElement) {
-  _inherits(DrawerComponent, _HTMLElement);
-  var _super = _createSuper(DrawerComponent);
-  function DrawerComponent() {
+var VariantComponent = /*#__PURE__*/function (_HTMLElement) {
+  _inherits(VariantComponent, _HTMLElement);
+  var _super = _createSuper(VariantComponent);
+  function VariantComponent() {
     var _this$shadowRoot;
     var _this;
-    _classCallCheck(this, DrawerComponent);
+    _classCallCheck(this, VariantComponent);
     _this = _super.call(this);
-    _defineProperty(_assertThisInitialized(_this), "isOpen", void 0);
-    _this.isOpen = false;
+    _defineProperty(_assertThisInitialized(_this), "variants", null);
+    _defineProperty(_assertThisInitialized(_this), "currentOptions", null);
     _this.attachShadow({
       mode: 'open'
     });
-    (_this$shadowRoot = _this.shadowRoot) === null || _this$shadowRoot === void 0 ? void 0 : _this$shadowRoot.appendChild(template.content.cloneNode(true));
-    _this.handleShowDrawer();
+    (_this$shadowRoot = _this.shadowRoot) === null || _this$shadowRoot === void 0 ? void 0 : _this$shadowRoot.appendChild(variantTemplate.content.cloneNode(true));
     return _this;
   }
-  _createClass(DrawerComponent, [{
+  _createClass(VariantComponent, [{
+    key: "getVariants",
+    value: function getVariants() {
+      if (!this.variants) {
+        var _this$querySelector;
+        this.variants = JSON.parse((_this$querySelector = this.querySelector('[type="application/json"]')) === null || _this$querySelector === void 0 ? void 0 : _this$querySelector.textContent).variants;
+      }
+      return this.variants;
+    }
+  }, {
+    key: "setCurrentOptions",
+    value: function setCurrentOptions(_ref) {
+      var name = _ref.name,
+        value = _ref.value;
+      // console.log({ name, value });
+      if (!this.currentOptions) {
+        var _this$querySelector2;
+        var currentVariant = JSON.parse((_this$querySelector2 = this.querySelector('[type="application/json"]')) === null || _this$querySelector2 === void 0 ? void 0 : _this$querySelector2.textContent).currentVariant;
+        this.currentOptions = currentVariant.options;
+      }
+      this.currentOptions[+name] = value;
+      // console.log(this.currentVariant);
+    }
+  }, {
+    key: "updateUrl",
+    value: function updateUrl(id) {
+      window.history.replaceState({}, '', "".concat(this.dataset.url, "?variant=").concat(id));
+    }
+  }, {
+    key: "updateFormId",
+    value: function updateFormId(id) {
+      var idInput = document.querySelector('#product-form input[name="id"]');
+      idInput.value = id;
+    }
+  }, {
+    key: "updatePrice",
+    value: function updatePrice(id) {
+      var url = this.dataset.url;
+      var section = this.dataset.section;
+      var oldPrice = document.getElementById('price');
+      oldPrice.classList.add('disabled');
+      oldPrice.value = '...';
+      fetch("".concat(url, "?variant=").concat(id, "&section=").concat(section)).then(function (res) {
+        return res.text();
+      }).then(function (res) {
+        var html = new DOMParser().parseFromString(res, 'text/html');
+        var newPrice = html.getElementById('price');
+        oldPrice.value = newPrice.value;
+        oldPrice.classList.remove('disabled');
+      })["catch"](function (err) {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      });
+    }
+  }, {
+    key: "getCurrentVariant",
+    value: function getCurrentVariant() {
+      var _this2 = this;
+      var currentVariant = this.getVariants().find(function (variant) {
+        return JSON.stringify(variant.options) === JSON.stringify(_this2.currentOptions);
+      });
+      return currentVariant;
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(_ref2) {
+      var name = _ref2.name,
+        value = _ref2.value;
+      this.setCurrentOptions({
+        name: name,
+        value: value
+      });
+      var currentVariant = this.getCurrentVariant();
+      this.updateUrl(currentVariant.id);
+      this.updateFormId(currentVariant.id);
+      this.updatePrice(currentVariant.id);
+    }
+  }, {
     key: "connectedCallback",
     value: function connectedCallback() {
-      this.handleShowDrawer();
-    }
-  }, {
-    key: "openDrawer",
-    value: function openDrawer() {
-      this.isOpen = true;
-      this.handleShowDrawer();
-    }
-  }, {
-    key: "closeDrawer",
-    value: function closeDrawer() {
-      this.isOpen = false;
-      this.handleShowDrawer();
-    }
-  }, {
-    key: "toggleDrawer",
-    value: function toggleDrawer() {
-      this.isOpen = !this.isOpen;
-      this.handleShowDrawer();
-    }
-  }, {
-    key: "handleShowDrawer",
-    value: function handleShowDrawer() {
-      var _this$shadowRoot2;
-      var drawer = (_this$shadowRoot2 = this.shadowRoot) === null || _this$shadowRoot2 === void 0 ? void 0 : _this$shadowRoot2.querySelector('.drawer');
-      if (this.isOpen) {
-        drawer === null || drawer === void 0 ? void 0 : drawer.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+      var _this$shadowRoot2,
+        _this3 = this;
+      var variants = (_this$shadowRoot2 = this.shadowRoot) === null || _this$shadowRoot2 === void 0 ? void 0 : _this$shadowRoot2.querySelectorAll('.variant');
+      if (!variants) {
+        return;
       } else {
-        drawer === null || drawer === void 0 ? void 0 : drawer.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        variants === null || variants === void 0 ? void 0 : variants.forEach(function (variant) {
+          variant.addEventListener('change', function (e) {
+            var _e$target = e.target,
+              value = _e$target.value,
+              name = _e$target.name;
+            _this3.handleChange({
+              name: name,
+              value: value
+            });
+          });
+        });
       }
     }
   }]);
-  return DrawerComponent;
+  return VariantComponent;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
-var template = document.createElement('template');
-template.innerHTML = /* html */"\n  <style>\n    .hidden {\n      display: none;\n    }\n    .drawer {\n      width: 200px;\n      max-width: 80%;\n      background: black;\n      height: 100vh;\n      position: absolute;\n      right: 0;\n      top: 0;\n      bottom: 0;\n      transition: all;\n      padding: 40px;\n      z-index: 11;\n    }\n\n    .close {\n      display: flex;\n      justify-content: end;\n    }\n\n  </style>\n\n  <div class=\"drawer hidden\">\n    <div class=\"close\">\n      <slot class=\"toggle\" name=\"close-menu\" />\n    </div>\n    <slot class=\"body\" name=\"body\" />\n  </div>\n";
-customElements.define('drawer-component', DrawerComponent);
+var variantTemplate = document.createElement('template');
+variantTemplate.innerHTML = /* html */"\n  <div>\n    <slot class=\"variant\" name=\"variant\" />\n    <slot class=\"submit\" name=\"submit\"/>\n  </div>\n";
+customElements.define('variant-component', VariantComponent);
 /******/ })()
 ;
