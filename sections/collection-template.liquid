@@ -6,10 +6,7 @@
         alt='{{section.settings.banner.alt}}'
       >
     {% else %}
-      {{
-        'lifestyle-2'
-        | placeholder_svg_tag: 'placeholder'
-      }}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
     {% endif %}
   </div>
   <div class='collection container'>
@@ -23,8 +20,8 @@
       <hr>
       <div class='sort'>
         <h4>Sort</h4>
-        <p>price, $-$$$</p>
-        <p>price, $$$-$</p>
+        <p class='low-high'>price, $-$$$</p>
+        <p class='high-low'>price, $$$-$</p>
       </div>
     </div>
     <div class='collection-grid'>
@@ -34,6 +31,53 @@
     </div>
   </div>
 </section>
+
+<script>
+  const lowToHigh = document.querySelector('.low-high');
+  const highToLow = document.querySelector('.high-low');
+
+  function setActiveClass() {
+    if (window.location.href.includes('price-ascending')) {
+      highToLow.classList.remove('active');
+      lowToHigh.classList.add('active');
+    } else if (window.location.href.includes('price-descending')) {
+      lowToHigh.classList.remove('active');
+      highToLow.classList.add('active');
+    }
+  }
+
+  const getCollection = async (sortBy) => {
+    const res = await (
+      await fetch(`/collections/{{collection.handle}}?sort_by=${sortBy}`)
+    ).text();
+    const html = new DOMParser().parseFromString(res, 'text/html');
+    const collectionGrid = document.querySelector('.collection-grid');
+    const newGrid = html.querySelector('.collection-grid').innerHTML;
+    collectionGrid.innerHTML = newGrid;
+    const selector = document.querySelector('currency-component');
+    selector.setConvertedCurrency();
+  };
+
+  lowToHigh.addEventListener('click', () => {
+    getCollection('price-ascending');
+    window.history.replaceState(
+      {},
+      '',
+      window.location.href.split('?')[0] + '?sort_by=price-ascending',
+    );
+    setActiveClass();
+  });
+  highToLow.addEventListener('click', () => {
+    getCollection('price-descending');
+    window.history.replaceState(
+      {},
+      '',
+      window.location.href.split('?')[0] + '?sort_by=price-descending',
+    );
+    setActiveClass();
+  });
+  setActiveClass();
+</script>
 
 {% schema %}
 {
