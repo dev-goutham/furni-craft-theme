@@ -1,16 +1,9 @@
 <footer>
   <div class='footer-banner'>
     {% if section.settings['footer-image'] %}
-      {{
-        section.settings['footer-image']
-        | img_tag: loading: 'lazy'
-      }}
+      {{ section.settings['footer-image'] | img_tag: loading: 'lazy' }}
     {% else %}
-      {{
-        'footer-image.png'
-        | asset_url
-        | img_tag: loading: 'lazy'
-      }}
+      {{ 'footer-image.png' | asset_url | img_tag: loading: 'lazy' }}
     {% endif %}
   </div>
 
@@ -51,7 +44,7 @@
             &#169; {{ 'now' | date: '%Y' }}
             {{ shop.name }}
           </div>
-          <div>{% render 'currency-selector' %}</div>
+          {% render 'currency-selector', id: 'footer-currency' %}
         </div>
       </div>
     </div>

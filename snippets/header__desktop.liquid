@@ -13,8 +13,11 @@
         {% render 'icon-search' %}
       </span>
     </div>
-    {% render 'currency-selector' %}
-    <cart-component item-count='{{cart.item_count}}'>
+    {% render 'currency-selector', id: 'header_desktop-currency' %}
+    <cart-component
+      currency='{{settings.default_currency}}'
+      item-count='{{cart.item_count}}'
+    >
       <button
         slot='cart-button'
         class='cart-button'
@@ -31,68 +34,6 @@
           {{ cart.item_count }}
         </span>
       </button>
-      {% comment %}
-        <div slot='cart-dialog'>
-          <div class='hidden cart-dialog'>
-            <div class='cart-items'>
-              {% for item in cart.items %}
-                <div class='cart-item' id='item-{{item.id}}'>
-                  <div>
-                    <img
-                      src='{{item.image | img_url: 'medium'}}'
-                      alt='{{item.image.alt}}'
-                    >
-                  </div>
-                  <div class='cart-item-details'>
-                    <div class='details'>
-                      <h3>{{ item.product.title }}</h3>
-                      <p>{{ item.variant.title }}</p>
-                    </div>
-                    <div class='cart-item-quantity'>
-                      Quantity:
-                      <span class='quantity'>
-                        {{ item.quantity }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class='cart-item-price'>
-                    <div class='price'>
-                      {{
-                        item.line_price
-                        | money_without_trailing_zeros
-                      }}
-                    </div>
-                    <button
-                      data-id='{{item.id}}'
-                      class='remove-button'
-                    >
-                      {% render 'icon-close' %}
-                    </button>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-            {% if cart.item_count > 0 %}
-              <div class='sub-total'>
-                <span class='subtotal'> Subtotal </span>
-                <span class='total-amount'>
-                  {{
-                    cart.total_price
-                    | money_without_trailing_zeros
-                  }}
-                </span>
-              </div>
-              <a class='checkout-btn' href='/cart'>
-                Checkout
-              </a>
-            {% else %}
-              <h3 style='padding: 30px; overflow: hidden'>
-                No Cart Items
-              </h3>
-            {% endif %}
-          </div>
-        </div>
-      {% endcomment %}
     </cart-component>
   </div>
 </div>

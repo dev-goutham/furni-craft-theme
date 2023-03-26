@@ -99,6 +99,7 @@ class CartComponent extends HTMLElement {
         createCheckoutButton(cartData.total_price, dialog!);
         this.attachRemoveButtons();
         this.attachPlusMinusButton();
+        this.updateCurrency();
       } else {
         cartCount.classList.add('empty');
         const noItems = document.createElement('h3');
@@ -109,6 +110,20 @@ class CartComponent extends HTMLElement {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  updateCurrency() {
+    const moneyEls = this.shadowRoot?.querySelectorAll('span.money');
+    const selector = document.querySelector(
+      'currency-component',
+    ) as unknown as {
+      getAmount: (amount: number) => number;
+    };
+    moneyEls?.forEach((el) => {
+      const amount = +el.getAttribute('data-amount')!;
+      const convertedAmount = selector.getAmount(amount / 100);
+      el.textContent = String(convertedAmount);
+    });
   }
 
   connectedCallback() {
@@ -151,11 +166,13 @@ class CartComponent extends HTMLElement {
         '.cart-button .count',
       ) as HTMLSpanElement;
       button.innerText = newValue;
+    } else if (name === 'currency') {
+      this.updateCurrency();
     }
   }
 
   static get observedAttributes() {
-    return ['item-count'];
+    return ['item-count', 'currency'];
   }
 }
 
@@ -165,7 +182,7 @@ const createCheckoutButton = (total: number, dialog: Element) => {
   checkoutSection.innerHTML = /* html */ `
           <div class='sub-total'>
             <span class='subtotal'> Subtotal </span>
-            <span class='total-amount'>
+            <span data-amount=${total} class='money total-amount'>
               ${total}
             </span>
           </div>
@@ -203,9 +220,9 @@ const createCartItems = (items: Item[], cartItems: HTMLElement) => {
         </div>
       </div>
       <div class='cart-item-price'>
-        <div class='price'>
+        <span data-amount=${item.line_price} class='money price'>
           ${item.line_price}
-        </div>
+        </span>
         <button
           data-id='${item.id}'
           class='remove-button'

@@ -1,44 +1,40 @@
 {{ 'component-drawer.js' | asset_url | script_tag }}
 {{ 'component-icon-button.js' | asset_url | script_tag }}
 
-<div class="mobile">
-
-  <button slot="open-menu" class="menu-toggle open">
+<div class='mobile'>
+  <button slot='open-menu' class='menu-toggle open'>
     {% render 'icon-menu' %}
   </button>
   <drawer-component>
-    <div class="drawer-body" slot="body">
-      <button class="menu-toggle close">
+    <div class='drawer-body' slot='body'>
+      <button class='menu-toggle close'>
         {% render 'icon-close' %}
       </button>
       <div>
         <nav>
-          {% for link in linklists.main-menu.links %}
-          <a href="{{link.url}}">
-            {{link.title}}
-          </a>
+          {% for link in linklists['main-menu'].links %}
+            <a href='{{link.url}}'>
+              {{ link.title }}
+            </a>
           {% endfor %}
         </nav>
-        <hr />
-        <div class="bottom">
-          <div class="search">
-            <span>
-              search
-            </span>
+        <hr>
+        <div class='bottom'>
+          <div class='search'>
+            <span> search </span>
             <span>
               {% render 'icon-search' %}
             </span>
           </div>
-          {% render 'currency-selector' %}
-          </div>
-          <a href="{{routes.cart_url}}" class="cart">
+          {% render 'currency-selector', id: 'header_mobile-currency' %}
+          <a href='{{routes.cart_url}}' class='cart'>
             <span>Cart</span>
             {% capture count_class %}
             {% if cart.item_count == 0 %}
             empty
             {% endif %}
             {% endcapture %}
-            <span class="count {{count_class}}">
+            <span class='count {{count_class}}'>
               {{ cart.item_count }}
             </span>
           </a>
@@ -49,21 +45,20 @@
 </div>
 
 <script>
-  const drawer = document.querySelector('drawer-component')
-  const openBtn = document.querySelector('.menu-toggle.open')
+  const drawer = document.querySelector('drawer-component');
+  const openBtn = document.querySelector('.menu-toggle.open');
   openBtn.addEventListener('click', () => {
-    drawer.openDrawer()
-  })
+    drawer.openDrawer();
+  });
   document.querySelector('.menu-toggle.close').addEventListener('click', () => {
-    drawer.closeDrawer()
-  })
-  window.addEventListener('keydown', e => {
-    if(e.code === 'Escape') drawer.closeDrawer()
-  })
-  window.addEventListener('click', e => {
-    
-    if(!drawer.contains(e.target) && !openBtn.contains(e.target)){
-      drawer.closeDrawer()
+    drawer.closeDrawer();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') drawer.closeDrawer();
+  });
+  window.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target) && !openBtn.contains(e.target)) {
+      drawer.closeDrawer();
     }
-  })
+  });
 </script>

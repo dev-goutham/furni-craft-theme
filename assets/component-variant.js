@@ -76,6 +76,7 @@ var VariantComponent = /*#__PURE__*/function (_HTMLElement) {
   }, {
     key: "updatePrice",
     value: function updatePrice(id) {
+      var selector = document.querySelector('currency-component');
       var url = this.dataset.url;
       var section = this.dataset.section;
       var oldPrice = document.getElementById('price');
@@ -86,7 +87,9 @@ var VariantComponent = /*#__PURE__*/function (_HTMLElement) {
       }).then(function (res) {
         var html = new DOMParser().parseFromString(res, 'text/html');
         var newPrice = html.getElementById('price');
-        oldPrice.value = newPrice.value;
+        var val = parseInt(newPrice.getAttribute('data-amount')) / 100;
+        var convertedPrice = String(selector.getAmount(val));
+        oldPrice.value = 'Add to Cart ' + convertedPrice;
         oldPrice.classList.remove('disabled');
       })["catch"](function (err) {
         // eslint-disable-next-line no-console

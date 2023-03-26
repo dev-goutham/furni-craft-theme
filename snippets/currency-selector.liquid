@@ -1,9 +1,16 @@
-<div class="currency">
-  <!-- todo: Create a html select for this part -->
-  <span>
-    {{ shop.currency }}
-  </span>
-  <span>
-    {% render 'icon-arrow-down' %}
-  </span>
+<div class='currency'>
+  {% assign currencies = settings.supported_currencies | split: ' ' %}
+  {% assign default = settings.default_currency %}
+  <currency-component
+    data-default='{{default}}'
+    data-currencies='{{settings.supported_currencies}}'
+  >
+    <select slot='select' name='currency' id='{{id}}'>
+      {% for currency in currencies %}
+        <option value='{{currency}}'>{{ currency }}</option>
+      {% endfor %}
+    </select>
+  </currency-component>
 </div>
+
+{{ 'component-currency-selector.js' | asset_url | script_tag }}

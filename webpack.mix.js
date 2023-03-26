@@ -11,6 +11,10 @@ mix
     'assets/component-icon-button.js',
   )
   .ts(
+    'src/ts/web-components/currency-selector.ts',
+    'assets/component-currency-selector.js',
+  )
+  .ts(
     'src/ts/web-components/variant.ts',
     'assets/component-variant.js',
   )

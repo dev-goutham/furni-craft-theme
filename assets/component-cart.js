@@ -289,6 +289,7 @@ var CartComponent = /*#__PURE__*/function (_HTMLElement) {
                 createCheckoutButton(cartData.total_price, dialog);
                 this.attachRemoveButtons();
                 this.attachPlusMinusButton();
+                this.updateCurrency();
               } else {
                 cartCount.classList.add('empty');
                 _noItems = document.createElement('h3');
@@ -313,6 +314,18 @@ var CartComponent = /*#__PURE__*/function (_HTMLElement) {
       }
       return updateCart;
     }()
+  }, {
+    key: "updateCurrency",
+    value: function updateCurrency() {
+      var _this$shadowRoot6;
+      var moneyEls = (_this$shadowRoot6 = this.shadowRoot) === null || _this$shadowRoot6 === void 0 ? void 0 : _this$shadowRoot6.querySelectorAll('span.money');
+      var selector = document.querySelector('currency-component');
+      moneyEls === null || moneyEls === void 0 ? void 0 : moneyEls.forEach(function (el) {
+        var amount = +el.getAttribute('data-amount');
+        var convertedAmount = selector.getAmount(amount / 100);
+        el.textContent = String(convertedAmount);
+      });
+    }
   }, {
     key: "connectedCallback",
     value: function connectedCallback() {
@@ -353,12 +366,14 @@ var CartComponent = /*#__PURE__*/function (_HTMLElement) {
       if (name === 'item-count') {
         var button = this.querySelector('.cart-button .count');
         button.innerText = newValue;
+      } else if (name === 'currency') {
+        this.updateCurrency();
       }
     }
   }], [{
     key: "observedAttributes",
     get: function get() {
-      return ['item-count'];
+      return ['item-count', 'currency'];
     }
   }]);
   return CartComponent;
@@ -366,7 +381,7 @@ var CartComponent = /*#__PURE__*/function (_HTMLElement) {
 var createCheckoutButton = function createCheckoutButton(total, dialog) {
   var checkoutSection = document.createElement('div');
   checkoutSection.className = 'checkout-section';
-  checkoutSection.innerHTML = /* html */"\n          <div class='sub-total'>\n            <span class='subtotal'> Subtotal </span>\n            <span class='total-amount'>\n              ".concat(total, "\n            </span>\n          </div>\n          <a class='checkout-btn' href='/cart'>\n            Checkout\n          </a>\n  ");
+  checkoutSection.innerHTML = /* html */"\n          <div class='sub-total'>\n            <span class='subtotal'> Subtotal </span>\n            <span data-amount=".concat(total, " class='money total-amount'>\n              ").concat(total, "\n            </span>\n          </div>\n          <a class='checkout-btn' href='/cart'>\n            Checkout\n          </a>\n  ");
   dialog.appendChild(checkoutSection);
 };
 var createCartItems = function createCartItems(items, cartItems) {
@@ -374,7 +389,7 @@ var createCartItems = function createCartItems(items, cartItems) {
     var cartItem = document.createElement('div');
     cartItem.className = 'cart-item';
     cartItem.id = "item-".concat(item.id);
-    cartItem.innerHTML = /* html */"\n      <div>\n        <img\n          src='".concat(item.image, "'\n          alt='").concat(item.id, "'\n        >\n      </div>\n      <div class='cart-item-details'>\n        <div class='details'>\n          <h3>").concat(item.product_title, "</h3>\n          <p>").concat(item.variant_title, "</p>\n        </div>\n        <div data-id=\"").concat(item.id, "\" data-quantity=\"").concat(item.quantity, "\" class='cart-item-quantity'>\n          Quantity:\n          <button class=\"cart-minus\">-</button>\n          <span class='quantity'>\n              ").concat(item.quantity, "\n          </span>\n          <button class=\"cart-plus\">+</button>\n        </div>\n      </div>\n      <div class='cart-item-price'>\n        <div class='price'>\n          ").concat(item.line_price, "\n        </div>\n        <button\n          data-id='").concat(item.id, "'\n          class='remove-button'\n        >\n        <svg\n          xmlns='http://www.w3.org/2000/svg'\n          viewBox='0 0 24 24'\n          fill='currentColor'\n          class='w-6 h-6'\n        >\n          <path fill-rule=\"evenodd\" d=\"M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z\" clip-rule=\"evenodd\" />\n        </svg>\n        </button>\n      </div>\n    ");
+    cartItem.innerHTML = /* html */"\n      <div>\n        <img\n          src='".concat(item.image, "'\n          alt='").concat(item.id, "'\n        >\n      </div>\n      <div class='cart-item-details'>\n        <div class='details'>\n          <h3>").concat(item.product_title, "</h3>\n          <p>").concat(item.variant_title, "</p>\n        </div>\n        <div data-id=\"").concat(item.id, "\" data-quantity=\"").concat(item.quantity, "\" class='cart-item-quantity'>\n          Quantity:\n          <button class=\"cart-minus\">-</button>\n          <span class='quantity'>\n              ").concat(item.quantity, "\n          </span>\n          <button class=\"cart-plus\">+</button>\n        </div>\n      </div>\n      <div class='cart-item-price'>\n        <span data-amount=").concat(item.line_price, " class='money price'>\n          ").concat(item.line_price, "\n        </span>\n        <button\n          data-id='").concat(item.id, "'\n          class='remove-button'\n        >\n        <svg\n          xmlns='http://www.w3.org/2000/svg'\n          viewBox='0 0 24 24'\n          fill='currentColor'\n          class='w-6 h-6'\n        >\n          <path fill-rule=\"evenodd\" d=\"M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z\" clip-rule=\"evenodd\" />\n        </svg>\n        </button>\n      </div>\n    ");
     cartItems.appendChild(cartItem);
   });
 };

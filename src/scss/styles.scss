@@ -31,10 +31,15 @@ main {
 }
 
 .currency {
-  margin-right: 14px;
-  display: flex;
-  svg {
-    margin-left: 5px;
-    transform: translateY(9px);
+  select {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: inherit;
+    font-size: 0.813rem;
+    font-weight: 500;
+    font-style: italic;
+    margin-right: 14px;
+    padding-right: 5px;
   }
 }

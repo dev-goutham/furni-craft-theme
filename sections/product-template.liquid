@@ -34,11 +34,7 @@
     <h1>
       {{ product.title }}
     </h1>
-    {% form 'product',
-      product,
-      id: 'product-form',
-      novalidate: 'novalidate'
-    %}
+    {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
       <input
         type='hidden'
         id='id'
@@ -119,7 +115,8 @@
       <input
         type='submit'
         {% if product.selected_or_first_available_variant.available %}
-          value='Add to Cart {{product.selected_or_first_available_variant.price | money_without_trailing_zeros}}'
+          data-amount='{{product.selected_or_first_available_variant.price}}'
+          value='Add to Cart {{product.selected_or_first_available_variant.price}}'
         {% else %}
           value='Out of Stock'
           disabled
