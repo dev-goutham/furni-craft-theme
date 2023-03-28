@@ -2,6 +2,7 @@ const mix = require('laravel-mix');
 
 mix
   .ts('src/ts/pages/product.js', 'assets/product.js')
+  .ts('src/ts/pages/cartPage.ts', 'assets/cartPage.js')
   .ts('src/ts/web-components/drawer.ts', 'assets/component-drawer.js')
   .ts('src/ts/web-components/icon-button.ts', 'assets/component-icon-button.js')
   .ts(

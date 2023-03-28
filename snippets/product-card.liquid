@@ -1,9 +1,5 @@
 <a href='{{product.url}}' class='product-card'>
-  {{
-    product.featured_image
-    | img_url: 'master'
-    | img_tag: loading: 'lazy'
-  }}
+  {{ product.featured_image | img_url: 'master' | img_tag: loading: 'lazy' }}
   <div class='product-details'>
     <div>
       <h3>
@@ -15,7 +11,7 @@
       </p>
     </div>
     <div>
-      {{ product.price | money_without_trailing_zeros }}
+      {{ product.price | money }}
     </div>
   </div>
 </a>

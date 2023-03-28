@@ -23,7 +23,9 @@ class CurrencySelector extends HTMLElement {
     const moneyEls = document.querySelectorAll('span.money');
 
     moneyEls.forEach((el) => {
-      const amount = +(el.getAttribute('data-amount') as string);
+      const amount = parseInt(
+        (el.getAttribute('data-amount') as string).split(',').join(''),
+      );
       el.textContent = this.getAmount(amount, cur);
     });
     const addToCartButtons = document.querySelectorAll('input[type="submit"]');

@@ -60,7 +60,7 @@ var CurrencySelector = /*#__PURE__*/function (_HTMLElement) {
       var cur = this.selectedCurrency;
       var moneyEls = document.querySelectorAll('span.money');
       moneyEls.forEach(function (el) {
-        var amount = +el.getAttribute('data-amount');
+        var amount = parseInt(el.getAttribute('data-amount').split(',').join(''));
         el.textContent = _this2.getAmount(amount, cur);
       });
       var addToCartButtons = document.querySelectorAll('input[type="submit"]');

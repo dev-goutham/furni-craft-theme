@@ -187,7 +187,7 @@ const createCheckoutButton = (total: number, dialog: Element) => {
             </span>
           </div>
           <a class='checkout-btn' href='/cart'>
-            Checkout
+            Go To Cart
           </a>
   `;
   dialog.appendChild(checkoutSection);
@@ -383,6 +383,9 @@ cartTemplate.innerHTML = /* html */ `
   margin-top: 16px;
   padding: 20px 0;
   text-align: center;
+}
+a {
+  text-decoration: none;
 }
   </style>
   <slot id="button" name="cart-button"></slot>
