@@ -106,43 +106,55 @@ var addEventListenersToCart = function addEventListenersToCart() {
         return _ref4.apply(this, arguments);
       };
     }();
-    addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-      var quantity;
-      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-        while (1) switch (_context5.prev = _context5.next) {
-          case 0:
-            quantity = parseInt(el.getAttribute('data-quantity'));
-            addItem(quantity);
-          case 2:
-          case "end":
-            return _context5.stop();
-        }
-      }, _callee5);
-    })));
-    deductBtn === null || deductBtn === void 0 ? void 0 : deductBtn.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-      var quantity;
-      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-        while (1) switch (_context6.prev = _context6.next) {
-          case 0:
-            quantity = parseInt(el.getAttribute('data-quantity'));
-            if (!(quantity > 1)) {
-              _context6.next = 6;
+    addBtn === null || addBtn === void 0 ? void 0 : addBtn.addEventListener('click', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(e) {
+        var quantity;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              e.preventDefault();
+              quantity = parseInt(el.getAttribute('data-quantity'));
+              addItem(quantity);
+            case 3:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5);
+      }));
+      return function (_x4) {
+        return _ref5.apply(this, arguments);
+      };
+    }());
+    deductBtn === null || deductBtn === void 0 ? void 0 : deductBtn.addEventListener('click', /*#__PURE__*/function () {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(e) {
+        var quantity;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              e.preventDefault();
+              quantity = parseInt(el.getAttribute('data-quantity'));
+              if (!(quantity > 1)) {
+                _context6.next = 7;
+                break;
+              }
+              _context6.next = 5;
+              return deductItem(quantity);
+            case 5:
+              _context6.next = 9;
               break;
-            }
-            _context6.next = 4;
-            return deductItem(quantity);
-          case 4:
-            _context6.next = 8;
-            break;
-          case 6:
-            _context6.next = 8;
-            return removeItem();
-          case 8:
-          case "end":
-            return _context6.stop();
-        }
-      }, _callee6);
-    })));
+            case 7:
+              _context6.next = 9;
+              return removeItem();
+            case 9:
+            case "end":
+              return _context6.stop();
+          }
+        }, _callee6);
+      }));
+      return function (_x5) {
+        return _ref6.apply(this, arguments);
+      };
+    }());
     removeBtn === null || removeBtn === void 0 ? void 0 : removeBtn.addEventListener('click', removeItem);
   });
 };

@@ -32,12 +32,14 @@ export const addEventListenersToCart = () => {
       el.parentElement?.remove();
     };
 
-    addBtn?.addEventListener('click', async () => {
+    addBtn?.addEventListener('click', async (e) => {
+      e.preventDefault();
       const quantity = parseInt(el.getAttribute('data-quantity')!);
       addItem(quantity);
     });
 
-    deductBtn?.addEventListener('click', async () => {
+    deductBtn?.addEventListener('click', async (e) => {
+      e.preventDefault();
       const quantity = parseInt(el.getAttribute('data-quantity')!);
       if (quantity > 1) {
         await deductItem(quantity);

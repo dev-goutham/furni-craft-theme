@@ -5,62 +5,66 @@
       <a href='/collections/collection-1'>Back to shopping</a>
     </div>
   {% else %}
-    {% for item in cart.items %}
-      <div class='cart-item'>
-        <div>
-          <img
-            src='{{item.image | img_url: 'medium'}}'
-            alt='{{item.id}}'
+    <form action='/cart' method='post' novalidate>
+      {% for item in cart.items %}
+        <div class='cart-item'>
+          <div>
+            <img
+              src='{{item.image | img_url: 'medium'}}'
+              alt='{{item.id}}'
+            >
+          </div>
+          <div
+            class='cart-item-details'
+            id='cart-{{item.id}}'
+            data-quantity='{{item.quantity}}'
+            data-id='{{item.id}}'
           >
-        </div>
-        <div
-          class='cart-item-details'
-          id='cart-{{item.id}}'
-          data-quantity='{{item.quantity}}'
-          data-id='{{item.id}}'
-        >
-          <div class='left'>
-            <div class='details'>
-              <h3>{{ item.product.title }}</h3>
-              <p>{{ item.variant.title }}</p>
-            </div>
-            <div
-              class='cart-item-quantity'
-            >
-              Quantity:
-              <button class='cart-minus'>-</button>
-              <span class='quantity'>
-                {{ item.quantity }}
-              </span>
-              <button class='cart-plus'>+</button>
-            </div>
-          </div>
-          <div class='cart-item-price'>
-            {{ item.line_price | money }}
-            <button
-              data-id='{{item.id}}'
-              class='remove-button'
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 24 24'
-                fill='currentColor'
-                class='w-6 h-6'
+            <div class='left'>
+              <div class='details'>
+                <h3>{{ item.product.title }}</h3>
+                <p>{{ item.variant.title }}</p>
+              </div>
+              <div
+                class='cart-item-quantity'
               >
-                <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-              </svg>
-            </button>
+                Quantity:
+                <button class='cart-minus'>-</button>
+                <span class='quantity'>
+                  {{ item.quantity }}
+                </span>
+                <button class='cart-plus'>+</button>
+              </div>
+            </div>
+            <div class='cart-item-price'>
+              {{ item.line_price | money }}
+              <button
+                data-id='{{item.id}}'
+                class='remove-button'
+              >
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
+                  class='w-6 h-6'
+                >
+                  <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
+      {% endfor %}
+      <div class='checkout'>
+        <div class='total'>
+          <span>Total</span>
+          {{ cart.total_price | money }}
+        </div>
+        <button type='submit' name='checkout' class='checkout-btn'>
+          Checkout
+        </button>
       </div>
-    {% endfor %}
-    <div class='checkout'>
-      <div class='total'>
-        <span>Total</span>
-        {{ cart.total_price | money }}
-      </div>
-      <div class='checkout-btn'>Checkout</div>
-    </div>
+    </form>
   {% endif %}
 </section>
 
