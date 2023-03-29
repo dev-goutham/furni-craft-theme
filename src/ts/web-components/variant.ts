@@ -17,7 +17,6 @@ class VariantComponent extends HTMLElement {
   }
 
   setCurrentOptions({ name, value }: { name: string; value: string }) {
-    // console.log({ name, value });
     if (!this.currentOptions) {
       const currentVariant = JSON.parse(
         this.querySelector('[type="application/json"]')?.textContent as string,
@@ -25,7 +24,6 @@ class VariantComponent extends HTMLElement {
       this.currentOptions = currentVariant.options;
     }
     this.currentOptions![+name] = value;
-    // console.log(this.currentVariant);
   }
 
   updateUrl(id: string) {

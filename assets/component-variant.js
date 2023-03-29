@@ -53,14 +53,12 @@ var VariantComponent = /*#__PURE__*/function (_HTMLElement) {
     value: function setCurrentOptions(_ref) {
       var name = _ref.name,
         value = _ref.value;
-      // console.log({ name, value });
       if (!this.currentOptions) {
         var _this$querySelector2;
         var currentVariant = JSON.parse((_this$querySelector2 = this.querySelector('[type="application/json"]')) === null || _this$querySelector2 === void 0 ? void 0 : _this$querySelector2.textContent).currentVariant;
         this.currentOptions = currentVariant.options;
       }
       this.currentOptions[+name] = value;
-      // console.log(this.currentVariant);
     }
   }, {
     key: "updateUrl",

@@ -1,5 +1,3 @@
-console.log('icon button');
-
 class IconButton extends HTMLButtonElement {
   constructor() {
     super();

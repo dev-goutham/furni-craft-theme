@@ -420,13 +420,11 @@ var CartComponent = /*#__PURE__*/function (_HTMLElement) {
     value: function attachPlusMinusButton() {
       var _this$shadowRoot4;
       var quantitySections = (_this$shadowRoot4 = this.shadowRoot) === null || _this$shadowRoot4 === void 0 ? void 0 : _this$shadowRoot4.querySelectorAll('.cart-item-quantity');
-      console.log(quantitySections);
       quantitySections === null || quantitySections === void 0 ? void 0 : quantitySections.forEach(function (qty) {
         var plusButton = qty.querySelector('.cart-plus');
         var minusButton = qty.querySelector('.cart-minus');
         var id = qty.getAttribute('data-id');
         var itemCount = qty.getAttribute('data-quantity');
-        console.log(itemCount);
         plusButton === null || plusButton === void 0 ? void 0 : plusButton.addEventListener('click', function () {
           (0,_utils_updateCart__WEBPACK_IMPORTED_MODULE_0__.updateCart)({
             quantity: +itemCount + 1,

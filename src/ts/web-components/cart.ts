@@ -45,13 +45,11 @@ class CartComponent extends HTMLElement {
     const quantitySections = this.shadowRoot?.querySelectorAll(
       '.cart-item-quantity',
     );
-    console.log(quantitySections);
     quantitySections?.forEach((qty) => {
       const plusButton = qty.querySelector('.cart-plus');
       const minusButton = qty.querySelector('.cart-minus');
       const id = qty.getAttribute('data-id') as unknown as number;
       const itemCount = qty.getAttribute('data-quantity') as unknown as number;
-      console.log(itemCount);
       plusButton?.addEventListener('click', () => {
         updateCart({
           quantity: +itemCount + 1,
