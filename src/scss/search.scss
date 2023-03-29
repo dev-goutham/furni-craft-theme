@@ -1,0 +1,74 @@
+@use "media-queries.scss" as *;
+
+.search-template {
+  background-color: #fafafa;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .search-container {
+    min-width: 50%;
+  }
+  .search-bar {
+    .input-container {
+      border-bottom: 2px solid #ccc;
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+    label {
+      display: block;
+      font-size: 0.813rem;
+      margin-bottom: 10px;
+    }
+    input {
+      border: none;
+      outline: none;
+      padding: 0;
+      background-color: transparent;
+      font-size: 30px;
+      font-weight: 500;
+      flex-grow: 1;
+      &::placeholder {
+        font-size: 30px;
+        font-weight: 500;
+        color: #ccc;
+        // line-height: 40px;
+      }
+    }
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px 21px 10px 19px;
+      font-size: 13px;
+      font-weight: 500;
+      transform: translateY(-10px);
+    }
+  }
+
+  .search-results {
+    margin-top: 60px;
+    margin-bottom: 80px;
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 35px;
+    }
+    .no-results {
+      font-size: 30px;
+      font-weight: 500;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(auto, 470px));
+      gap: 38px;
+
+      @include gt-md {
+        grid-template-columns: repeat(2, minmax(auto, 470px));
+      }
+    }
+  }
+}

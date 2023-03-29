@@ -20,12 +20,12 @@
         </nav>
         <hr>
         <div class='bottom'>
-          <div class='search'>
+          <a href='/search' class='search'>
             <span> search </span>
             <span>
               {% render 'icon-search' %}
             </span>
-          </div>
+          </a>
           {% render 'currency-selector', id: 'header_mobile-currency' %}
           <a href='{{routes.cart_url}}' class='cart'>
             <span>Cart</span>

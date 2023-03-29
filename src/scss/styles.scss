@@ -10,6 +10,7 @@
 @use "product-template.scss";
 @use "cart.scss";
 @use "page.scss";
+@use "search.scss";
 @use "footer.scss";
 
 :root {
@@ -22,10 +23,15 @@ body {
   font-family: var(--font-mono);
   position: relative;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  min-height: calc(100vh - 200px);
+  flex-grow: 1;
+  & > * {
+    height: 100%;
+  }
 }
 
 .container {

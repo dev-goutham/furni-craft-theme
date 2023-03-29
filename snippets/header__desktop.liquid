@@ -7,12 +7,12 @@
     {% endfor %}
   </nav>
   <div class='right'>
-    <div class='search'>
+    <a href='/search' class='search'>
       <span> search </span>
       <span>
         {% render 'icon-search' %}
       </span>
-    </div>
+    </a>
     {% render 'currency-selector', id: 'header_desktop-currency' %}
     <cart-component
       currency='{{settings.default_currency}}'
